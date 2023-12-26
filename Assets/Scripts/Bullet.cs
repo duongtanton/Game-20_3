@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        speed = 12;
+    
     }
 
     // Update is called once per frame
@@ -32,6 +32,9 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag("Character")) {
+            return;
+        }
         Destroy(gameObject);
     }
 }
