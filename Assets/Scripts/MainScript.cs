@@ -7,6 +7,7 @@ public class MainScript : MonoBehaviour
     public Transform chickenTransform;
     public int numberOfChickens = 10;
     public Chicken chicken;
+    public List<Chicken> chickens;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,7 @@ public class MainScript : MonoBehaviour
         // Spawn multiple chickens
         for (int i = 0; i < numberOfChickens; i++)
         {
-           Instantiate(chicken, chickenTransform.position, transform.rotation);
+           Instantiate(chickens[Random.Range(0, chickens.Count)], chickenTransform.position, transform.rotation);
         }
     }
 }

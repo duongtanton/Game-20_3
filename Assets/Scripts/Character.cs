@@ -9,14 +9,15 @@ public class Character : MonoBehaviour
     public AudioClip shootSound;
     public float rotationAmount;
     public float moveSpeed;
-    public Bullet bullet;
     public int bulletType;
     public int power;
+    public Bullet bullet;
+    public List<Bullet> bullets;
 
     // Start is called before the first frame update
     void Start()
     {
- 
+        transform.rotation = Quaternion.identity;
     }
 
     // Update is called once per frame
@@ -96,6 +97,7 @@ public class Character : MonoBehaviour
 
     private void ShootBullet1()
     {
+        Bullet bullet = bullets[Random.Range(0, bullets.Count)];
         int center = power / 2;
         int redundant = power % 2;
         if (redundant == 1)

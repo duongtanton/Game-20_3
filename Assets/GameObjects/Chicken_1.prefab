@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 3027120828748386768}
   - component: {fileID: 1991514272276981905}
   m_Layer: 0
-  m_Name: Chicken
+  m_Name: Chicken_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,7 +109,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e0ee845a8d53d1f498ccca89c3a3b5e1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 701d0d4dda3981d4599f5d9d45f7bb4d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -156,7 +156,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.68266666, y: 0.68266666}
+    oldSize: {x: 0.64, y: 0.64}
     newSize: {x: 1.28, y: 1.28}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -191,7 +191,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &3027120828748386768
 MonoBehaviour:
   m_ObjectHideFlags: 0
