@@ -5,14 +5,14 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     public Transform bulletTransform;
-    public GameObject bulletPrefab;
-    public AudioClip shootSound;
     public float rotationAmount;
     public float moveSpeed;
     public int bulletType;
     public int power;
     public Bullet bullet;
     public List<Bullet> bullets;
+    public Explosion explosion;
+    public AudioClip pickupItem;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +32,7 @@ public class Character : MonoBehaviour
     }
     void Rotate()
     {
-        
+
     }
     void Move()
     {
@@ -47,7 +47,7 @@ public class Character : MonoBehaviour
         float minY = -screenHeight / 2;
         float maxY = screenHeight / 2;
 
-        Vector2 size = GetSize(gameObject) + new Vector2(-0.5f,-0.5f);
+        Vector2 size = GetSize(gameObject) + new Vector2(-0.5f, -0.5f);
         transform.position = new Vector3(
             Mathf.Clamp(transform.position.x, minX + size.x, maxX - size.x),
             Mathf.Clamp(transform.position.y, minY + size.y, maxY - size.y),
@@ -91,7 +91,21 @@ public class Character : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Chicken"))
         {
-            
+            Explosion();
+            Destroy(gameObject);
+        }
+        if (collision.gameObject.CompareTag("Egg"))
+        {
+            Explosion();
+            Destroy(gameObject);
+        }
+        if (collision.gameObject.CompareTag("Power"))
+        {
+            GetComponent<AudioSource>().PlayOneShot(pickupItem);
+        }
+        if (collision.gameObject.CompareTag("ChickenThighs"))
+        {
+            GetComponent<AudioSource>().PlayOneShot(pickupItem);
         }
     }
 
@@ -115,9 +129,11 @@ public class Character : MonoBehaviour
             direction2.x -= 0.25f * (i);
             Instantiate(bullet, direction2, transform.rotation);
         }
-        if (shootSound != null)
-        {
-            GetComponent<AudioSource>().PlayOneShot(shootSound);
-        }
+    }
+
+    private void Explosion()
+    {
+        Vector3 direction = bulletTransform.position;
+        Instantiate(explosion, direction, transform.rotation);
     }
 }

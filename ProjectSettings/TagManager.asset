@@ -8,6 +8,9 @@ TagManager:
   - Bullet
   - Character
   - Egg
+  - Power
+  - ChickenThighs
+  - Gift
   layers:
   - Default
   - TransparentFX

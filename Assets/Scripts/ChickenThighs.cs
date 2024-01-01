@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Egg : MonoBehaviour
+public class ChickenThighs : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float chickenThighsFallSpeed;
+
     void Start()
     {
-        IgnoreCollider2D(new List<string>() { "Gift", "Power"});
+        IgnoreCollider2D(new List<string>() { "Egg", "Bullet", "Gift"});
     }
 
     // Update is called once per frame
@@ -18,20 +19,17 @@ public class Egg : MonoBehaviour
 
     void Move()
     {
-        // Destroy the bullet when it goes off-screen
-        if (!GetComponent<Renderer>().isVisible)
+        transform.Translate(Vector2.down * chickenThighsFallSpeed * Time.deltaTime);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Character"))
         {
             Destroy(gameObject);
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Bullet") || collision.gameObject.CompareTag("Character"))
-        {
-            Destroy(gameObject);
-        }
-    }
 
     private void IgnoreCollider2D(List<string> tags)
     {

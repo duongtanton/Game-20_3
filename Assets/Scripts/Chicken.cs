@@ -17,6 +17,9 @@ public class Chicken : MonoBehaviour
     public float eggFallSpeed;
     public float eggSeconds;
 
+    public ChickenThighs chickenThighs;
+    public float chickenThighsFallSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +40,10 @@ public class Chicken : MonoBehaviour
             blood -= 1;
             if (blood <= 0)
             {
+                Vector3 _direction = preTransform.position;
+                ChickenThighs newChickenThighs = Instantiate(chickenThighs, _direction, transform.rotation);
+                Physics2D.IgnoreCollision(newChickenThighs.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+                Rigidbody2D ChickenThighsRb = newChickenThighs.GetComponent<Rigidbody2D>();
                 Destroy(gameObject);
             }
 
@@ -61,6 +68,7 @@ public class Chicken : MonoBehaviour
         {
             Vector3 direction = preTransform.position;
             Egg newEgg = Instantiate(egg, direction, transform.rotation);
+            Physics2D.IgnoreCollision(newEgg.GetComponent<Collider2D>(), GetComponent<Collider2D>());
             Rigidbody2D rb = newEgg.GetComponent<Rigidbody2D>();
             rb.AddForce(Vector2.down * eggFallSpeed, ForceMode2D.Impulse);
             yield return new WaitForSeconds(Random.Range(eggSeconds, eggSeconds + 5f));

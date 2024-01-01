@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 1991514272276981905}
   m_Layer: 0
   m_Name: Chicken_4
-  m_TagString: Untagged
+  m_TagString: Chicken
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -213,6 +213,8 @@ MonoBehaviour:
   egg: {fileID: 4928771450248150946, guid: 584aaa647c3a3da44a1dc4caf234c2f7, type: 3}
   eggFallSpeed: 1.5
   eggSeconds: 4
+  chickenThighs: {fileID: 2804269068549384430, guid: 2a57749a52501324a9a72a95da942ca7, type: 3}
+  chickenThighsFallSpeed: 4
 --- !u!82 &1991514272276981905
 AudioSource:
   m_ObjectHideFlags: 0

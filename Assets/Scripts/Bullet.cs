@@ -6,12 +6,13 @@ public class Bullet : MonoBehaviour
 {
     public float speed;
 
-    public SpriteRenderer spriteRenderer;
+    public AudioClip shootSound;
 
     // Start is called before the first frame update
     void Start()
     {
-    
+        IgnoreCollider2D(new List<string>() {"Character", "Gift", "Power", "ChickenThighs"});
+        GetComponent<AudioSource>().PlayOneShot(shootSound);
     }
 
     // Update is called once per frame
@@ -34,9 +35,19 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Character")) {
-            return;
-        }
         Destroy(gameObject);
+    }
+
+    private void IgnoreCollider2D(List<string> tags)
+    {
+        tags.ForEach(item =>
+        {
+            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(item);
+            for (int i = 0; i < gameObjects.Length; i++)
+            {
+                GameObject current = gameObjects[i];
+                Physics2D.IgnoreCollision(current.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            }
+        });
     }
 }
