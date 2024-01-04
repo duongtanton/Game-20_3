@@ -161,4 +161,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d02e565e9fc6a74f8258527466c67c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chickenThighsFallSpeed: 4
+  chickenThighsFallSpeed: 6

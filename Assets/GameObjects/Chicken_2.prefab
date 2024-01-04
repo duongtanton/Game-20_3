@@ -214,7 +214,7 @@ MonoBehaviour:
   eggFallSpeed: 1.5
   eggSeconds: 4
   chickenThighs: {fileID: 2804269068549384430, guid: 2a57749a52501324a9a72a95da942ca7, type: 3}
-  chickenThighsFallSpeed: 4
+  chickenThighsFallSpeed: 6
 --- !u!82 &1991514272276981905
 AudioSource:
   m_ObjectHideFlags: 0

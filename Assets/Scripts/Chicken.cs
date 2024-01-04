@@ -18,7 +18,6 @@ public class Chicken : MonoBehaviour
     public float eggSeconds;
 
     public ChickenThighs chickenThighs;
-    public float chickenThighsFallSpeed;
 
     // Start is called before the first frame update
     void Start()

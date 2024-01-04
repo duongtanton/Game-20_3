@@ -13,6 +13,7 @@ public class Character : MonoBehaviour
     public List<Bullet> bullets;
     public Explosion explosion;
     public AudioClip pickupItem;
+    public PlusOne plusOne;
 
     // Start is called before the first frame update
     void Start()
@@ -106,6 +107,9 @@ public class Character : MonoBehaviour
         if (collision.gameObject.CompareTag("ChickenThighs"))
         {
             GetComponent<AudioSource>().PlayOneShot(pickupItem);
+            Vector3 direction = bulletTransform.position;
+            direction.x += 0.5f;
+            Instantiate(plusOne, direction, transform.rotation);
         }
     }
 
