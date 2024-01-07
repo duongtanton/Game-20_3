@@ -11,6 +11,7 @@ TagManager:
   - Power
   - ChickenThighs
   - Gift
+  - PlayButton
   layers:
   - Default
   - TransparentFX
