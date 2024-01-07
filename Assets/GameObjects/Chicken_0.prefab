@@ -210,11 +210,15 @@ MonoBehaviour:
   preTransform: {fileID: 6924297786561678509}
   feather: {fileID: 3756778033689800073, guid: f5cf552debb24cf48b50714314b64a50, type: 3}
   featherFallSpeed: 2
+  power: {fileID: -4460441310856503120, guid: d85ba5155bf2686499dc8856143ecd12, type: 3}
+  powerFallSpeed: 1.5
+  gift: {fileID: 8818242836455509929, guid: dedeab05c7909a84c9dc1ac9719f59bd, type: 3}
+  giftFallSpeed: 0
   egg: {fileID: 4928771450248150946, guid: 584aaa647c3a3da44a1dc4caf234c2f7, type: 3}
   eggFallSpeed: 1.5
   eggSeconds: 4
+  type: 0
   chickenThighs: {fileID: 2804269068549384430, guid: 2a57749a52501324a9a72a95da942ca7, type: 3}
-  chickenThighsFallSpeed: 6
 --- !u!82 &1991514272276981905
 AudioSource:
   m_ObjectHideFlags: 0

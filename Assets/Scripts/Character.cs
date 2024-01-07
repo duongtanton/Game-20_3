@@ -14,11 +14,18 @@ public class Character : MonoBehaviour
     public Explosion explosion;
     public AudioClip pickupItem;
     public PlusOne plusOne;
+    public int score;
+    private bool canTakeDamage;
+    private float delayDuration;
 
     // Start is called before the first frame update
     void Start()
     {
+        canTakeDamage = true;
+        delayDuration = 0.1f;
+        bulletType = 0;
         transform.rotation = Quaternion.identity;
+        score = 0;
     }
 
     // Update is called once per frame
@@ -33,7 +40,8 @@ public class Character : MonoBehaviour
     }
     void Rotate()
     {
-
+        Debug.Log("bulletType" + bulletType);
+        Debug.Log("bullets.Count" + bullets.Count);
     }
     void Move()
     {
@@ -64,9 +72,6 @@ public class Character : MonoBehaviour
     {
         switch (bulletType)
         {
-            case 2:
-                break;
-            case 1:
             default:
                 //bulletType == 1
                 ShootBullet1();
@@ -93,15 +98,23 @@ public class Character : MonoBehaviour
         if (collision.gameObject.CompareTag("Chicken"))
         {
             Explosion();
-            Destroy(gameObject);
+            PreDestroy(gameObject);
         }
         if (collision.gameObject.CompareTag("Egg"))
         {
             Explosion();
-            Destroy(gameObject);
+            PreDestroy(gameObject);
+        }
+        if (collision.gameObject.CompareTag("Gift"))
+        {
+            bulletType = Random.Range(0, bullets.Count);
+            GetComponent<AudioSource>().PlayOneShot(pickupItem);
         }
         if (collision.gameObject.CompareTag("Power"))
         {
+            if (power < 7) { 
+                power++;
+            }
             GetComponent<AudioSource>().PlayOneShot(pickupItem);
         }
         if (collision.gameObject.CompareTag("ChickenThighs"))
@@ -115,7 +128,7 @@ public class Character : MonoBehaviour
 
     private void ShootBullet1()
     {
-        Bullet bullet = bullets[Random.Range(0, bullets.Count)];
+        Bullet bullet = bullets[bulletType];
         int center = power / 2;
         int redundant = power % 2;
         if (redundant == 1)
@@ -135,9 +148,27 @@ public class Character : MonoBehaviour
         }
     }
 
+    private void PreDestroy(GameObject gameObject)
+    {
+        if (canTakeDamage)
+        {
+            canTakeDamage = false;
+            StartCoroutine(DamageDelay());
+            bool destroy = FindFirstObjectByType<MainScript>().ChangeHeart(-1);
+            if (destroy)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
     private void Explosion()
     {
         Vector3 direction = bulletTransform.position;
         Instantiate(explosion, direction, transform.rotation);
+    }
+    IEnumerator DamageDelay()
+    {
+        yield return new WaitForSeconds(delayDuration);
+        canTakeDamage = true;
     }
 }

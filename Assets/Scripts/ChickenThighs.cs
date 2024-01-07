@@ -8,7 +8,8 @@ public class ChickenThighs : MonoBehaviour
 
     void Start()
     {
-        IgnoreCollider2D(new List<string>() { "Egg", "Bullet", "Gift"});
+        chickenThighsFallSpeed = 6;
+        IgnoreCollider2D(new List<string>() { "Egg", "Bullet", "Gift", "Chicken", "Power"});
     }
 
     // Update is called once per frame

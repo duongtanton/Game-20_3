@@ -7,7 +7,7 @@ public class Egg : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        IgnoreCollider2D(new List<string>() { "Gift", "Power"});
+        IgnoreCollider2D(new List<string>() { "Gift", "Power", "Chicken"});
     }
 
     // Update is called once per frame

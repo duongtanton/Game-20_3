@@ -12,23 +12,47 @@ public class Chicken : MonoBehaviour
 
     public Feather feather;
     public float featherFallSpeed;
+    
+    public Power power;
+    public float powerFallSpeed;
+
+    public Gift gift;
+    public float giftFallSpeed;
 
     public Egg egg;
     public float eggFallSpeed;
     public float eggSeconds;
+    public int type;
 
     public ChickenThighs chickenThighs;
 
     // Start is called before the first frame update
     void Start()
     {
+        blood = 3;
+        fallSpeed = 0.5f;
+        featherFallSpeed = 2f;
+        eggFallSpeed = 1.5f;
+        eggSeconds = 4f;
+        powerFallSpeed = 1.5f;
+        giftFallSpeed = 1.5f;
+        type = 0;
         StartCoroutine(AddEgg());
     }
 
     // Update is called once per frame
     void Update()
     {
-        MoveChicken();
+
+        switch (type)
+        {
+            case 1:
+                MoveDownChicken();
+                break;
+            case 2:
+                break;
+        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -42,7 +66,14 @@ public class Chicken : MonoBehaviour
                 Vector3 _direction = preTransform.position;
                 ChickenThighs newChickenThighs = Instantiate(chickenThighs, _direction, transform.rotation);
                 Physics2D.IgnoreCollision(newChickenThighs.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-                Rigidbody2D ChickenThighsRb = newChickenThighs.GetComponent<Rigidbody2D>();
+
+                if (Random.Range(1, 5) == 1) {
+                    Instantiate(power, _direction, transform.rotation);
+                };
+                if (Random.Range(1, 5) == 1)
+                {
+                    Instantiate(gift, _direction, transform.rotation);
+                };
                 Destroy(gameObject);
             }
 
@@ -55,7 +86,7 @@ public class Chicken : MonoBehaviour
  
     }
         
-    void MoveChicken()
+    void MoveDownChicken()
     {
         transform.Translate(Vector3.down * fallSpeed * Time.deltaTime);
     }
@@ -73,4 +104,5 @@ public class Chicken : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(eggSeconds, eggSeconds + 5f));
         }
     }
+
 }

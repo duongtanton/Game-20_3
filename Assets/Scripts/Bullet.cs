@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        speed = 15;
         IgnoreCollider2D(new List<string>() {"Character", "Gift", "Power", "ChickenThighs"});
         GetComponent<AudioSource>().PlayOneShot(shootSound);
     }
