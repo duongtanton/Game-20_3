@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Chicken : MonoBehaviour
 {
+    private int id;
+
     public int blood;
     public AudioClip hurtSound;
     public float fallSpeed;
@@ -25,6 +27,11 @@ public class Chicken : MonoBehaviour
     public int type;
 
     public ChickenThighs chickenThighs;
+
+    public void SetId(int id)
+    {
+        this.id = id;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -67,25 +74,43 @@ public class Chicken : MonoBehaviour
                 ChickenThighs newChickenThighs = Instantiate(chickenThighs, _direction, transform.rotation);
                 Physics2D.IgnoreCollision(newChickenThighs.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 
-                if (Random.Range(1, 5) == 1) {
+                if (Random.Range(1, 5) == 1)
+                {
                     Instantiate(power, _direction, transform.rotation);
                 };
                 if (Random.Range(1, 5) == 1)
                 {
                     Instantiate(gift, _direction, transform.rotation);
                 };
-                Destroy(gameObject);
+                PreDestroy(gameObject);
             }
 
             Vector3 direction = preTransform.position;
-            Feather newFeather =  Instantiate(feather, direction, transform.rotation);
+            Feather newFeather = Instantiate(feather, direction, transform.rotation);
 
             Rigidbody2D rb = newFeather.GetComponent<Rigidbody2D>();
             rb.AddForce(Vector2.down * featherFallSpeed, ForceMode2D.Impulse);
         }
- 
+
+        if (collision.gameObject.CompareTag("Character"))
+        {
+            PreDestroy(gameObject);
+        }
     }
         
+    void PreDestroy(GameObject gameObject)
+    {
+        int index = FindAnyObjectByType<MainScript>()
+            .renderedChickens.FindIndex(item => item.id == id);
+        if (index >= 0)
+        {
+            FindAnyObjectByType<MainScript>()
+            .renderedChickens.RemoveAt(index);
+        }
+
+        Destroy(gameObject);
+    }
+
     void MoveDownChicken()
     {
         transform.Translate(Vector3.down * fallSpeed * Time.deltaTime);

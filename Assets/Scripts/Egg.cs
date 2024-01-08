@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Egg : MonoBehaviour
 {
+
+    public BrokenEgg brokenEgg;
+
     // Start is called before the first frame update
     void Start()
     {
-        IgnoreCollider2D(new List<string>() { "Gift", "Power", "Chicken"});
+        IgnoreCollider2D(new List<string>() { "Gift", "Power", "Chicken", "Egg"});
     }
 
     // Update is called once per frame
@@ -29,6 +32,8 @@ public class Egg : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet") || collision.gameObject.CompareTag("Character"))
         {
+            Vector3 direction = transform.position;
+            Instantiate(brokenEgg, direction, transform.rotation);
             Destroy(gameObject);
         }
     }

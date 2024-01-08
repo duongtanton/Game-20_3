@@ -17,6 +17,16 @@ public class PlayButton : MonoBehaviour
         
 
     }
+    void OnMouseOver()
+    {
+        GetComponent<SpriteRenderer>().color = Color.green;
+    }
+
+    void OnMouseExit()
+    {
+        GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
     void OnMouseDown()
     {
         Debug.Log("Switch to: " + "MainScreen");

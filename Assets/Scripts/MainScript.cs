@@ -14,6 +14,7 @@ public class MainScript : MonoBehaviour
     public List<Heart> hearts;
     public GameOver gameOver;
     public Character character;
+    public int score;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,13 @@ public class MainScript : MonoBehaviour
         audioSource.volume -= 0.9f;
         audioSource.Play();
         renderedChickens = new List<Chicken>();
+        StartCoroutine(DelayedFunction());
+    }
+
+    // Coroutine for delayed execution
+    IEnumerator DelayedFunction()
+    {
+        yield return new WaitForSeconds(1.5f);
         SpawnChickens();
         StartCoroutine(Stage1());
     }
@@ -31,7 +39,7 @@ public class MainScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log("Rendered chicken: " + renderedChickens.Count);
     }
 
     private void SpawnChickens()
@@ -45,6 +53,7 @@ public class MainScript : MonoBehaviour
             position.y -= renderer.bounds.size.y + 0.1f;
             for (int j = 0; j < numberOfChickens; j++)
             {
+                chicken.SetId(i * numberOfChickens + (j + 1));
                 renderedChickens.Add(chicken);
                 Instantiate(chicken, position, transform.rotation);
             }

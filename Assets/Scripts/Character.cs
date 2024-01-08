@@ -119,6 +119,7 @@ public class Character : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("ChickenThighs"))
         {
+            FindFirstObjectByType<Score>().Change(5);
             GetComponent<AudioSource>().PlayOneShot(pickupItem);
             Vector3 direction = bulletTransform.position;
             direction.x += 0.5f;
@@ -131,19 +132,26 @@ public class Character : MonoBehaviour
         Bullet bullet = bullets[bulletType];
         int center = power / 2;
         int redundant = power % 2;
+        float distants = 1;
         if (redundant == 1)
         {
             Vector3 direction = bulletTransform.position;
+            direction.y += 0.25f * center;
             Instantiate(bullet, direction, transform.rotation);
+        } else
+        {
+            distants = 0.5f;
         }
         for (int i = 1; i <= center; i++)
         {
             Vector3 direction1 = bulletTransform.position;
-            direction1.x += 0.25f * (i);
+            direction1.x += 0.25f * (i)* distants;
+            direction1.y += 0.25f * (center - i);
             Instantiate(bullet, direction1, transform.rotation);
 
             Vector3 direction2 = bulletTransform.position;
-            direction2.x -= 0.25f * (i);
+            direction2.x -= 0.25f * (i)* distants;
+            direction2.y += 0.25f * (center - i);
             Instantiate(bullet, direction2, transform.rotation);
         }
     }
