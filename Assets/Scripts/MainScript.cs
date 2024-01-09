@@ -15,6 +15,7 @@ public class MainScript : MonoBehaviour
     public GameOver gameOver;
     public Character character;
     public int score;
+    public int stage;
 
     // Start is called before the first frame update
     void Start()
@@ -25,13 +26,14 @@ public class MainScript : MonoBehaviour
         audioSource.volume -= 0.9f;
         audioSource.Play();
         renderedChickens = new List<Chicken>();
-        StartCoroutine(DelayedFunction());
+        stage = 1;
+        StartCoroutine(DelayedFunction(2f));
     }
 
     // Coroutine for delayed execution
-    IEnumerator DelayedFunction()
+    IEnumerator DelayedFunction(float time)
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(time);
         SpawnChickens();
         StartCoroutine(Stage1());
     }
@@ -39,7 +41,7 @@ public class MainScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Rendered chicken: " + renderedChickens.Count);
+        
     }
 
     private void SpawnChickens()
@@ -53,9 +55,9 @@ public class MainScript : MonoBehaviour
             position.y -= renderer.bounds.size.y + 0.1f;
             for (int j = 0; j < numberOfChickens; j++)
             {
-                chicken.SetId(i * numberOfChickens + (j + 1));
-                renderedChickens.Add(chicken);
-                Instantiate(chicken, position, transform.rotation);
+                Chicken newChicken = Instantiate(chicken, position, transform.rotation);
+                newChicken.SetId(i * numberOfChickens + (j + 1));
+                renderedChickens.Add(newChicken);
             }
         }
     }
@@ -85,12 +87,18 @@ public class MainScript : MonoBehaviour
         return false;
     }
 
-    private IEnumerator Stage1()
+    public IEnumerator Stage1()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1.5f);
 
         renderedChickens.ForEach(chicken =>{
-            chicken.type = 1;
+            //chicken.type = 1;
         });
+    }
+    
+    public IEnumerator Stage2()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SpawnChickens();
     }
 }

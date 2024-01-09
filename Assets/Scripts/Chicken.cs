@@ -100,14 +100,8 @@ public class Chicken : MonoBehaviour
         
     void PreDestroy(GameObject gameObject)
     {
-        int index = FindAnyObjectByType<MainScript>()
-            .renderedChickens.FindIndex(item => item.id == id);
-        if (index >= 0)
-        {
-            FindAnyObjectByType<MainScript>()
-            .renderedChickens.RemoveAt(index);
-        }
-
+        MainScript mainScript = FindAnyObjectByType<MainScript>();
+        mainScript.renderedChickens.Remove(GetComponent<Chicken>());
         Destroy(gameObject);
     }
 
